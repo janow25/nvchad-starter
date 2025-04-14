@@ -26,13 +26,9 @@ local function close_if_float()
   -- Check if current window is floating
   local win_config = vim.api.nvim_win_get_config(0)
   if win_config.relative ~= "" then
-    vim.cmd("bd!") -- Close buffer if in a floating window
+    vim.cmd "bd!" -- Close buffer if in a floating window
   else
-    vim.api.nvim_feedkeys(
-      vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, false, true),
-      "n",
-      true
-    )
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, false, true), "n", true)
   end
 end
 
@@ -49,15 +45,14 @@ map("n", "<leader>h", function()
   require("nvterm.terminal").toggle "horizontal"
 end, { desc = "Toggle horizontal terminal" })
 
-
 -- Copilot Accept with Tab in insert mode
 map("i", "<Tab>", "copilot#Accept()", {
   desc = "Copilot Accept with Tab",
-  expr = true,      -- Make it work as an expression
-  silent = true,    -- Don't show any output
-  noremap = true,   -- Prevent remapping
+  expr = true, -- Make it work as an expression
+  silent = true, -- Don't show any output
+  noremap = true, -- Prevent remapping
   replace_keycodes = true,
-  nowait = true,    -- Avoid waiting for more input
+  nowait = true, -- Avoid waiting for more input
 })
 
 -- Copilot Accept with <C-l> in insert mode
