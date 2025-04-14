@@ -35,3 +35,6 @@ require "nvchad.autocmds"
 vim.schedule(function()
   require "mappings"
 end)
+
+-- disable copilot tab mapping to fix symbol
+vim.g.copilot_no_tab_map = true
