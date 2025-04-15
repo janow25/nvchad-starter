@@ -22,7 +22,7 @@ map("n", "<A-i>", function()
   require("nvterm.terminal").toggle "float"
 end, { desc = "Toggle floating terminal" })
 
--- Terminal toggles using nvterm
+-- Terminal toggles for MacOS right alt key
 map("n", "ª", function()
   require("nvterm.terminal").toggle "horizontal"
 end, { desc = "Toggle horizontal terminal" })
@@ -40,9 +40,8 @@ local function close_if_float()
   local win_config = vim.api.nvim_win_get_config(win)
 
   if win_config.relative ~= "" then
-    vim.api.nvim_win_close(win, true) -- just close the floating window
+    vim.api.nvim_win_close(win, true)
   else
-    -- just exit terminal insert mode
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, false, true), "n", true)
   end
 end
@@ -70,19 +69,9 @@ end, { desc = "Toggle horizontal terminal" })
 -- Copilot Accept with Tab in insert mode
 map("i", "<Tab>", "copilot#Accept()", {
   desc = "Copilot Accept with Tab",
-  expr = true, -- Make it work as an expression
-  silent = true, -- Don't show any output
-  noremap = true, -- Prevent remapping
-  replace_keycodes = true,
-  nowait = true, -- Avoid waiting for more input
-})
-
--- Copilot Accept with <C-l> in insert mode
-map("i", "<C-l>", "copilot#Accept()", {
-  desc = "Copilot Accept",
   expr = true,
   silent = true,
   noremap = true,
-  replace_keycodes = true,
+  replace_keycodes = false,
   nowait = true,
 })
