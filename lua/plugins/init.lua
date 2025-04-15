@@ -6,22 +6,7 @@ return {
       require("nvterm").setup()
     end,
   },
-
-  {
-    "nvim-treesitter/nvim-treesitter",
-    lazy = false,
-    build = ":TSUpdate",
-    config = function()
-      require("nvim-treesitter.configs").setup {
-        ensure_installed = { "lua", "javascript", "typescript", "python", "html", "css", "json", "bash", "csv", "dockerfile", "helm", "markdown", "yaml", "xml",  }, -- 👈 Add languages here
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = false,
-        },
-      }
-    end,
-  },
-
+ 
   {
     "github/copilot.vim",
     lazy = false,
@@ -52,13 +37,25 @@ return {
   -- test new blink
   -- { import = "nvchad.blink.lazyspec" },
 
-  -- {
-  -- 	"nvim-treesitter/nvim-treesitter",
-  -- 	opts = {
-  -- 		ensure_installed = {
-  -- 			"vim", "lua", "vimdoc",
-  --      "html", "css"
-  -- 		},
-  -- 	},
-  -- },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "lua",
+        "javascript",
+        "typescript",
+        "python",
+        "html",
+        "css",
+        "json",
+        "bash",
+        "csv",
+        "dockerfile",
+        "helm",
+        "markdown",
+        "yaml",
+        "xml",
+      },
+    },
+  },
 }
