@@ -8,6 +8,20 @@ return {
   },
 
   {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    config = function()
+      require("nvim-treesitter.configs").setup {
+        ensure_installed = { "lua", "javascript", "typescript", "python", "html", "css", "json", "bash", "csv", "dockerfile", "helm", "markdown", "yaml", "xml",  }, -- 👈 Add languages here
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = false,
+        },
+      }
+    end,
+  },
+
+  {
     "github/copilot.vim",
     lazy = false,
     config = function()
