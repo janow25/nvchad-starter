@@ -65,13 +65,3 @@ end, { desc = "Toggle vertical terminal" })
 map("n", "<leader>h", function()
   require("nvterm.terminal").toggle "horizontal"
 end, { desc = "Toggle horizontal terminal" })
-
--- Copilot Accept with Tab in insert mode
-map("i", "<Tab>", "copilot#Accept()", {
-  desc = "Copilot Accept with Tab",
-  expr = true,
-  silent = true,
-  noremap = true,
-  replace_keycodes = false,
-  nowait = true,
-})
