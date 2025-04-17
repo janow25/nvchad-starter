@@ -1,3 +1,16 @@
+**Informations**
+This is a fork from the nvchad-starter repo. Added in Plugins are:
+- Copilot
+- blink
+- start-page
+- ...
+
+**Installation**
+
+```bash
+git clone https://github.com/janow25/nvchad-starter.git ~/.config/nvim && nvim
+```
+
 **This repo is supposed to used as config by NvChad users!**
 
 - The main nvchad repo (NvChad/NvChad) is used as a plugin by this repo.
