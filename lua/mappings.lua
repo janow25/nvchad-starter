@@ -57,6 +57,16 @@ map("n", "<Esc>", function()
   end
 end, { desc = "Close terminal window" })
 
+-- On Control + C in normal mode in terminal do insert and again control + c
+map("n", "<C-c>", function()
+  if vim.bo.buftype == "terminal" then
+    vim.cmd "startinsert"
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-c>", true, false, true), "n", true)
+  else
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-c>", true, false, true), "n", true)
+  end
+end, { desc = "Control + C in terminal" })
+
 -- Fix broken <leader>v and <leader>h terminal mappings
 map("n", "<leader>v", function()
   require("nvterm.terminal").toggle "vertical"
