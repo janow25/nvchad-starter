@@ -1,15 +1,16 @@
 return {
-  -- {
-  --   "zbirenbaum/copilot.lua",
-  --   cmd = "Copilot",
-  --   event = "InsertEnter",
-  --   config = function()
-  --     require("copilot").setup {}
-  --   end,
-  -- },
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup {}
+    end,
+  },
   {
     "github/copilot.vim",
     lazy = false,
+    eneabled = false,
     config = function()
       -- Uncomment these if you want to use a different mapping for Tab
       -- vim.g.copilot_no_tab_map = true
@@ -21,51 +22,7 @@ return {
         ["*"] = true, -- Enable for all filetypes by default
         ["gitcommit"] = true, -- Explicitly enable for git commit messages
         ["markdown"] = true, -- Example: Enable for Markdown files
-        -- Add more filetypes here if needed
       }
-
-      -- The mapping is set to other key, see custom/lua/mappings
-      -- or run <leader>ch to see Copilot mapping section
     end,
-  },
-  {
-    "saghen/blink.cmp",
-    optional = true,
-    dependencies = { "fang2hou/blink-copilot" },
-    opts = {
-      sources = {
-        default = { "copilot" },
-        providers = {
-          copilot = {
-            name = "copilot",
-            module = "blink-copilot",
-            score_offset = 100,
-            async = true,
-          },
-        },
-      },
-      completion = {
-        keyword = {
-          range = "full",
-        },
-      },
-      keymap = {
-        ["<Tab>"] = {
-          function(cmp)
-            if cmp.snippet_active() then
-              return cmp.accept()
-            else
-              return cmp.select_and_accept()
-            end
-          end,
-          "snippet_forward",
-          "fallback",
-        },
-        ["<S-Tab>"] = { "snippet_backward", "fallback" },
-
-        --["<Up>"] = { "select_prev", "fallback" },
-        --["<Down>"] = { "select_next", "fallback" },
-      },
-    },
   },
 }

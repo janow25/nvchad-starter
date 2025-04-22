@@ -3,7 +3,7 @@ local lspconfig = require "lspconfig"
 
 nvlsp.defaults() -- loads nvchad's defaults
 
-local servers = { "html", "cssls", "pyright", "jsonls", "bashls", "ts_ls", "eslint" }
+local servers = { "html", "cssls", "pyright", "jsonls", "bashls", "ts_ls" } -- "eslint"
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
