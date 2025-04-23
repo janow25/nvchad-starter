@@ -1,8 +1,44 @@
 require "nvchad.mappings"
 
--- add yours here
+local nomap = vim.keymap.del
+
+vim.g.tmux_navigator_no_mappings = 1
+
+nomap("n", "<C-h>")
+nomap("n", "<C-j>")
+nomap("n", "<C-k>")
+nomap("n", "<C-l>")
 
 local map = vim.keymap.set
+
+-- Custom key mappings for Tmux navigation
+-- Works in both normal mode and terminal mode
+local opts = { desc = "Tmux navigation", silent = true }
+
+-- Left navigation
+map({ "n", "t" }, "<C-h>", function()
+  vim.cmd("silent! TmuxNavigateLeft")
+end, opts)
+
+-- Down navigation
+map({ "n", "t" }, "<C-j>", function()
+  vim.cmd("silent! TmuxNavigateDown")
+end, opts)
+
+-- Up navigation
+map({ "n", "t" }, "<C-k>", function()
+  vim.cmd("silent! TmuxNavigateUp")
+end, opts)
+
+-- Right navigation
+map({ "n", "t" }, "<C-l>", function()
+  vim.cmd("silent! TmuxNavigateRight")
+end, opts)
+
+-- Previous navigation
+map({ "n", "t" }, "<C-p>", function()
+  vim.cmd("silent! TmuxNavigatePrevious")
+end, opts)
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
