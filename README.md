@@ -1,4 +1,4 @@
-**Informations**
+*Informations*
 This is a fork from the nvchad-starter repo. Added in Plugins are:
 - Copilot
 - blink
@@ -20,3 +20,10 @@ git clone https://github.com/janow25/nvchad-starter.git ~/.config/nvim && nvim
 # Credits
 
 1) Lazyvim starter https://github.com/LazyVim/starter as nvchad's starter was inspired by Lazyvim's . It made a lot of things easier!
+
+# Install nvim for with older glibc
+```bash
+wget https://github.com/neovim/neovim-releases/releases/download/v0.11.0/nvim-linux-x86_64.tar.gz
+sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
+sudo ln -s /opt/nvim-linux-x86_64/bin/nvim /usr/bin/nvim
+```
