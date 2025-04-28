@@ -37,6 +37,7 @@ return {
         "markdown",
         "yaml",
         "xml",
+        "rust-analyzer",
       },
       highlight = {
         enable = true,
