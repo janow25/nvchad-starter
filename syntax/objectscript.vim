@@ -4,9 +4,22 @@
 syntax keyword objectscriptKeyword Class Method Property Parameter As Extends Return Storage Default
 syntax keyword objectscriptKeyword Set Do Write set do write s d w #dim
 
-" Highlight class names, method names, and parameters
-syntax match objectscriptClassName "\<[A-Za-z0-9_\.]\+\>"
-syntax match objectscriptMethodName "\<%[A-Za-z0-9_]\+\>" " Highlight methods starting with a % (e.g., %OnNew)
+" Highlight ##class and ##super as separate constructs
+syntax match objectscriptClassConstruct "##\(class\|super\)\>"
+
+" Highlight the class name inside ##class(...) without including ##class itself
+syntax region objectscriptClassName start="##class(" end=")" contained contains=objectscriptBrackets,objectscriptInnerClassName
+
+" Highlight the actual class name inside ##class(...)
+syntax match objectscriptInnerClassName "\<[A-Za-z0-9_\.]\+\>" contained
+
+" Highlight brackets inside ##class(...)
+syntax match objectscriptBrackets "[()]" contained
+
+" Highlight method names
+syntax match objectscriptMethodName "\<[%A-Za-z0-9_]\+\>"
+
+" Highlight parameters (e.g., `..param`)
 syntax match objectscriptParameter "\<\.\.[A-Za-z0-9_]\+\>"
 
 " Highlight specific $-prefixed constructs (generic match for all $-commands)
@@ -20,9 +33,6 @@ syntax match objectscriptMacroWithArgs "\$\$\$[A-Za-z0-9_]\+\s*("
 
 " Highlight system calls (e.g., $SYSTEM.Status.GetErrorText)
 syntax match objectscriptSystemCall "\$SYSTEM\.[A-Za-z0-9_\.]\+"
-
-" Highlight ##class and ##super constructs
-syntax match objectscriptClassConstruct "##\(class\|super\)\>"
 
 " Highlight `Property ... As` with `%` library types (e.g., Property ... As %Library.String)
 syntax match objectscriptPropertyWithType "Property\s\+[A-Za-z0-9_]\+\s\+As\s\+%[A-Za-z0-9_\.]\+"
@@ -48,14 +58,16 @@ syntax region objectscriptMultilineComment start="/\*" end="\*/" contains=object
 
 " Define highlight groups
 highlight link objectscriptKeyword Keyword
+highlight link objectscriptClassConstruct Statement
 highlight link objectscriptClassName Type
+highlight link objectscriptInnerClassName Type
+highlight link objectscriptBrackets Operator
 highlight link objectscriptMethodName Function
 highlight link objectscriptParameter Identifier
 highlight link objectscriptDollarCommands Special
 highlight link objectscriptMacro Special
 highlight link objectscriptMacroWithArgs Special
 highlight link objectscriptSystemCall Function
-highlight link objectscriptClassConstruct Statement
 highlight link objectscriptPropertyWithType Type
 highlight link objectscriptOperator Operator
 highlight link objectscriptComment Comment
