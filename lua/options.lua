@@ -22,12 +22,3 @@ opt.swapfile = false
 vim.diagnostic.config({
   update_in_insert = true,
 })
-
-vim.api.nvim_create_autocmd({"FileType"}, {
-  pattern = "objectscript",
-  callback = function()
-    -- Clear existing syntax and source your custom syntax file
-    vim.cmd("syntax clear")
-    vim.cmd("source ~/.config/nvim/syntax/objectscript.vim")
-  end,
-})

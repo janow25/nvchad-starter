@@ -39,15 +39,9 @@ return {
         "xml",
         "rust-analyzer",
       },
-      -- Register the custom parser
-      parsers = {
-        objectscript = {
-          install_info = {
-            url = "~/.config/nvim/parser/objectscript",
-            files = {"grammar.js", "highlights.scm"},
-          },
-          filetype = "objectscript",
-        },
+      highlight = {
+        enable = true,
+        disable = { "objectscript" },
       },
     },
   },
