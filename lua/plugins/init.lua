@@ -39,14 +39,15 @@ return {
         "xml",
         "rust-analyzer",
       },
-      highlight = {
-        enable = true,
-
-        -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-        -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-        -- the name of the parser)
-        -- list of language that will be disabled
-        disable = { "objectscript" },
+      -- Register the custom parser
+      parsers = {
+        objectscript = {
+          install_info = {
+            url = "~/.config/nvim/parser/objectscript",
+            files = {"grammar.js", "highlights.scm"},
+          },
+          filetype = "objectscript",
+        },
       },
     },
   },
