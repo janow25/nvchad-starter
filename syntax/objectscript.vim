@@ -1,26 +1,27 @@
 " Syntax highlighting for ObjectScript
 
 " Define keywords
-syntax keyword objectscriptKeyword Class Method Property Parameter As Extends Return Storage Default
-syntax keyword objectscriptKeyword Set Do Write set do write s d w #dim
+syntax keyword objectscriptKeyword Class Method ClassMethod Property Parameter As as Extends Return Storage Default
+syntax keyword objectscriptKeyword Set Do Write set do write s d w Return return Quit quit q New new n ZN ZNspace
+
+syntax match objectscriptKeyword "\v#dim" 
 
 " Highlight ##class and ##super as separate constructs
 syntax match objectscriptClassConstruct "##\(class\|super\)\>"
 
-" Highlight the class name inside ##class(...) without including ##class itself
-syntax region objectscriptClassName start="##class(" end=")" contained contains=objectscriptBrackets,objectscriptInnerClassName
-
-" Highlight the actual class name inside ##class(...)
-syntax match objectscriptInnerClassName "\<[A-Za-z0-9_\.]\+\>" contained
-
-" Highlight brackets inside ##class(...)
+" Highlight the brackets inside ##class(...) or ##super(...)
 syntax match objectscriptBrackets "[()]" contained
 
-" Highlight method names
-syntax match objectscriptMethodName "\<[%A-Za-z0-9_]\+\>"
+" Highlight the class name inside ##class(...) or ##super(...) without including ##class or ##super
+syntax region objectscriptClassName start="##class(" end=")" contained contains=objectscriptClassConstruct,objectscriptBrackets,objectscriptInnerClassName
 
+" Highlight the actual class name inside ##class(...) or ##super(...)
+syntax match objectscriptInnerClassName "[%A-Za-z0-9_]\+" contained
+
+" Highlight method names globally
+syntax match objectscriptMethodName "[%A-Za-z0-9_]\+"
 " Highlight parameters (e.g., `..param`)
-syntax match objectscriptParameter "\<\.\.[A-Za-z0-9_]\+\>"
+"syntax match objectscriptParameter "\<\.\.[A-Za-z0-9_]\+\>"
 
 " Highlight specific $-prefixed constructs (generic match for all $-commands)
 syntax match objectscriptDollarCommands "\$[A-Za-z0-9_]\+"
@@ -29,7 +30,7 @@ syntax match objectscriptDollarCommands "\$[A-Za-z0-9_]\+"
 syntax match objectscriptMacro "\$\$\$[A-Za-z0-9_]\+"
 
 " Highlight macros with arguments (e.g., $$$MACRO(arg))
-syntax match objectscriptMacroWithArgs "\$\$\$[A-Za-z0-9_]\+\s*("
+"syntax match objectscriptMacroWithArgs "\$\$\$[A-Za-z0-9_]\+\s*("
 
 " Highlight system calls (e.g., $SYSTEM.Status.GetErrorText)
 syntax match objectscriptSystemCall "\$SYSTEM\.[A-Za-z0-9_\.]\+"
@@ -42,10 +43,10 @@ syntax match objectscriptOperator "'=\|=\|<>\|>=\|<=\|<\|>\|_\|+"
 
 " Highlight comments
 syntax match objectscriptComment "//.*" contains=objectscriptTodo
-syntax match objectscriptTodo "TODO"
+syntax match objectscriptTodo "TODO:.*" contained
 
 " Highlight strings (support multiline strings)
-syntax region objectscriptString start=/"/ end=/"/ skip=/\\\"/ contains=objectscriptOperator
+syntax region objectscriptString start=/"/ end=/"/ skip=/\\\"/
 
 " Highlight numbers (support floats and scientific notation)
 syntax match objectscriptNumber "\<\d\+\(\.\d*\([eE][+-]\?\d\+\)\?\|\([eE][+-]\?\d\+\)\)\>"
