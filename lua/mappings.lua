@@ -45,6 +45,18 @@ map("i", "jk", "<ESC>")
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
+-- Move Line Up/Down
+map("n", "<A-UP>", function()
+  vim.cmd "m .-2"
+  --vim.cmd "normal! gv"
+end, { desc = "Move Line UP" })
+
+map("n", "<A-DOWN>", function()
+  vim.cmd "m .+1"
+  --vim.cmd "normal! gv"
+end, { desc = "Move Line DOWN" })
+
+
 -- Terminal toggles using nvterm
 map("n", "<A-h>", function()
   require("nvterm.terminal").toggle "horizontal"
