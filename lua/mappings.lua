@@ -11,6 +11,18 @@ nomap("n", "<C-l>")
 
 local map = vim.keymap.set
 
+-- Custom key mappings to close all buffers and open dashboard
+map("n", "<leader>qa", function()
+  -- Iterate through all buffers and close only saved ones
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].modified == false then
+      vim.cmd("bd " .. buf)
+    end
+  end
+
+  vim.cmd("Nvdash")
+end, { desc = "Close all buffers and open dashboard" })
+
 -- Custom key mappings for Tmux navigation
 -- Works in both normal mode and terminal mode
 local opts = { desc = "Tmux navigation", silent = true }
