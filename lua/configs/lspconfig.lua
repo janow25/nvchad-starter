@@ -1,32 +1,68 @@
 local nvlsp = require "nvchad.configs.lspconfig"
 local lspconfig = require "lspconfig"
 
-nvlsp.defaults() -- loads nvchad's defaults
+nvlsp.defaults() -- Load NvChad's default LSP settings
 
-local servers = { "html", "cssls", "pyright", "jsonls", "bashls", "ts_ls" }
+-- Individual LSP configurations
+lspconfig.html.setup {
+  on_attach = nvlsp.on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+}
 
--- lsps with default config
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = nvlsp.on_attach,
-    on_init = nvlsp.on_init,
-    capabilities = nvlsp.capabilities,
-  }
-end
+lspconfig.cssls.setup {
+  on_attach = nvlsp.on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+}
 
-vim.lsp.config('rust_analyzer', {
+lspconfig.pyright.setup {
+  on_attach = nvlsp.on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+}
+
+lspconfig.jsonls.setup {
+  on_attach = nvlsp.on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+}
+
+lspconfig.bashls.setup {
+  on_attach = nvlsp.on_attach,
+  capabilities = nvlsp.capabilities,
+  filetypes = { "sh" },
   settings = {
-    ['rust-analyzer'] = {
-      diagnostics = {
-        enable = false;
-      }
-    }
-  }
-})
+    bashIde = {
+      globPattern = "*@(.sh|.inc|.bash|.command)",
+    },
+  },
+}
 
+lspconfig.ts_ls.setup {
+  on_attach = nvlsp.on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+}
+
+-- Dockerfile LSP
+lspconfig.dockerls.setup {
+  on_attach = nvlsp.on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+  filetypes = { "dockerfile" },}
+
+-- Rust Analyzer with custom settings
 lspconfig.rust_analyzer.setup {
   on_attach = nvlsp.on_attach,
   capabilities = nvlsp.capabilities,
   filetypes = { "rust" },
   root_dir = lspconfig.util.root_pattern("Cargo.toml"),
+  settings = {
+    ["rust-analyzer"] = {
+      diagnostics = {
+        enable = false, -- Disable diagnostics
+      },
+    },
+  },
 }

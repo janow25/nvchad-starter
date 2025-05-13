@@ -41,7 +41,7 @@ return {
       },
       highlight = {
         enable = true,
-        disable = { "objectscript" },
+        disable = { "objectscript", "dockerfile" },
       },
     },
   },
