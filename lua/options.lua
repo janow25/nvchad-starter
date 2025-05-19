@@ -18,6 +18,10 @@ opt.splitbelow = true -- split horizontal window to the bottom
 -- turn off swapfile
 opt.swapfile = false
 
+-- fix No Name buffer
+-- by janow
+opt.hidden = false
+
 -- show lsp infos in insert mode
 vim.diagnostic.config({
   update_in_insert = true,
