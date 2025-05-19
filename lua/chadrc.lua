@@ -21,4 +21,21 @@ M.nvdash = { load_on_startup = true }
 --      }
 --}
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "nvdash",
+  callback = function()
+    vim.opt.showtabline = 0
+  end,
+})
+
+vim.api.nvim_create_autocmd("BufLeave", {
+  pattern = "*",
+  callback = function()
+    -- Restore tabline when leaving nvdash (if you want it always visible otherwise)
+    if vim.opt.showtabline:get() == 0 then
+      vim.opt.showtabline = 2
+    end
+  end,
+})
+
 return M
