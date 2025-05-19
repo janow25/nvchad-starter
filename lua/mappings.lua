@@ -58,15 +58,17 @@ map("i", "jk", "<ESC>")
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
 -- Move Line Up/Down
-map("n", "<A-UP>", function()
-  vim.cmd "m .-2"
-  --vim.cmd "normal! gv"
-end, { desc = "Move Line UP" })
+-- Normal mode: Move line up/down
+map("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
+map("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
+map("n", "<A-Down>", ":m .+1<CR>==", { desc = "Move line down" })
+map("n", "<A-Up>", ":m .-2<CR>==", { desc = "Move line up" })
 
-map("n", "<A-DOWN>", function()
-  vim.cmd "m .+1"
-  --vim.cmd "normal! gv"
-end, { desc = "Move Line DOWN" })
+-- Visual mode: Move selected lines up/down and reselect
+map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
+map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
+map("v", "<A-Down>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
+map("v", "<A-Up>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
 
 
 -- Terminal toggles using nvterm
