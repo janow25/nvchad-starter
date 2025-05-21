@@ -1,5 +1,7 @@
 local nvlsp = require "nvchad.configs.lspconfig"
-local lspconfig = require "lspconfig"
+local lspconfig = require("lspconfig")
+local configs = require("lspconfig.configs")
+local util = require("lspconfig.util")
 
 nvlsp.defaults() -- Load NvChad's default LSP settings
 
@@ -65,4 +67,36 @@ lspconfig.rust_analyzer.setup {
       },
     },
   },
+}
+
+-- Register custom server only if not already done
+if not configs.intersystems_ls then
+  configs.intersystems_ls = {
+    default_config = {
+      cmd = { "/Users/janow/Developer/iris-lsp/darwin-x86_64/intersystems-ls" },
+      filetypes = { "objectscript", "objectscript_class" },
+      root_dir = function(fname)
+        return util.root_pattern("*.cls")(fname) or util.find_git_ancestor(fname)
+      end,
+      settings = {
+        objectscript = {
+          conn = {
+            active = true,
+            host = "localhost",
+            ns = "USER",
+            superPort = 1972,
+            username = "_SYSTEM",
+            password = "SYS"
+          }
+        }
+      },
+    },
+  }
+end
+
+lspconfig.intersystems_ls.setup{
+  on_attach = nvlsp.on_attach,
+  capabilities = nvlsp.capabilities,
+  filetypes = { "objectscript", "objectscript_class" },
+
 }
