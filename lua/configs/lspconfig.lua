@@ -73,7 +73,7 @@ lspconfig.rust_analyzer.setup {
 if not configs.intersystems_ls then
   configs.intersystems_ls = {
     default_config = {
-      cmd = { "/Users/janow/Developer/iris-lsp/darwin-x86_64/intersystems-ls" },
+      cmd = { "/home/jno/linux-x86_64/intersystems-ls" },
       filetypes = { "objectscript", "objectscript_class" },
       root_dir = function(fname)
         return util.root_pattern("*.cls")(fname) or util.find_git_ancestor(fname)
@@ -82,11 +82,11 @@ if not configs.intersystems_ls then
         objectscript = {
           conn = {
             active = true,
-            host = "localhost",
-            ns = "USER",
-            superPort = 1972,
-            username = "_SYSTEM",
-            password = "SYS"
+            host = "mymhs.maerz-network/mhs",
+            ns = "MHSLIB",
+            superPort = 443,
+            username = "_system",
+            password = "sys"
           }
         }
       },
