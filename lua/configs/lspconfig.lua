@@ -30,6 +30,30 @@ lspconfig.jsonls.setup {
   capabilities = nvlsp.capabilities,
 }
 
+require('lspconfig').helm_ls.setup {
+  on_attach = nvlsp.on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+
+  -- settings = {
+  --   ['helm-ls'] = {
+  --     yamlls = {
+  --       path = "yaml-language-server",
+  --     }
+  --   }
+  -- }
+}
+
+require('lspconfig').yamlls.setup {
+  on_attach = function(client, bufnr)
+    if vim.bo[bufnr].filetype == "helm" then
+      vim.schedule(function()
+        vim.cmd("LspStop ++force yamlls")
+      end)
+    end
+  end,
+}
+
 lspconfig.bashls.setup {
   on_attach = nvlsp.on_attach,
   capabilities = nvlsp.capabilities,
