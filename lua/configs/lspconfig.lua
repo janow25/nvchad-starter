@@ -5,6 +5,10 @@ local util = require "lspconfig.util"
 
 nvlsp.defaults() -- Load NvChad's default LSP settings
 
+require('render-markdown').setup({
+    completions = { blink = { enabled = true } },
+})
+
 -- Individual LSP configurations
 lspconfig.html.setup {
   on_attach = nvlsp.on_attach,
