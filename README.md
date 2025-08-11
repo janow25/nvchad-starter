@@ -1,4 +1,4 @@
-# Informations
+# Information
 This is a fork from the nvchad-starter repo. Added in Plugins are:
 - Copilot
 - blink
