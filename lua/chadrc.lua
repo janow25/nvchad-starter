@@ -42,6 +42,13 @@ M.ui = {
 }
 
 vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.opt.spell = true
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
   pattern = "nvdash",
   callback = function()
     vim.opt.showtabline = 0

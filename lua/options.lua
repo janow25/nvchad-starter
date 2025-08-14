@@ -22,6 +22,8 @@ opt.swapfile = false
 -- by janow
 opt.hidden = false
 
+opt.spelllang = "en,de"
+
 -- show lsp infos in insert mode
 vim.diagnostic.config({
   update_in_insert = true,
